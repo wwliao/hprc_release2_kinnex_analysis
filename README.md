@@ -16,7 +16,7 @@ The workflows cover the full pipeline from preprocessing raw reads to downstream
 
     To align FLNC reads, each BAM file is converted to FASTQ format. We add the sample ID as a prefix to each read name to ensure uniqueness after pooling across samples. Each FASTQ file is then aligned to the reference genome using minimap2 with GENCODE v48 annotations in BED12 format.
 
-    Finally, the 206 aligned BAM files are merged into one, then split into 25 chromosome-level BAMs. These files are ready for transcript discovery and unified transcript model construction across samples.
+    Finally, the 206 aligned BAM files are merged into a single BAM file for unified transcript model construction across samples.
 
 3. Transcript Discovery
 4. Transcript Quantification
