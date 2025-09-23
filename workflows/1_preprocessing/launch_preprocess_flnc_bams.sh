@@ -10,7 +10,7 @@
 module purge
 module load Nextflow/24.04.4
 
-SAMPLE_SHEET="samplesheet.additional_4.csv"
+SAMPLE_SHEET="samplesheet.csv"
 OUTDIR="results"
 
 nextflow run main.nf \
