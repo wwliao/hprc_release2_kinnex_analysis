@@ -28,11 +28,11 @@ The workflows cover the full pipeline from preprocessing raw reads to downstream
 
     - Transcript model construction
     
-    A unified transcript model across samples is built using the merged BAM file as input to IsoQuant. Because this step is computationally intensive, the merged BAM is split into 25 chromosome-level BAM files. IsoQuant is run on each chromosome, and the resulting extended GTFs are combined into a single extended GTF for downstream analysis.
+        A unified transcript model across samples is built using the merged BAM file as input to IsoQuant. Because this step is computationally intensive, the merged BAM is split into 25 chromosome-level BAM files. IsoQuant is run on each chromosome, and the resulting extended GTFs are combined into a single extended GTF for downstream analysis.
     
     - Read assignment to transcripts
     
-    The extended GTF is then used as the unified transcript model. Each per-sample BAM file is processed with IsoQuant to assign reads to known and novel transcripts for qunatification.
+        The extended GTF is then used as the unified transcript model. Each per-sample BAM file is processed with IsoQuant to assign reads to known and novel transcripts for qunatification.
 
 4. Transcript Quantification
 5. QTL mapping
