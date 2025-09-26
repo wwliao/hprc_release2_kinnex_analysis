@@ -28,7 +28,7 @@ The workflows cover the full pipeline from preprocessing raw reads to downstream
 
     - Transcript model construction
     
-        A unified transcript model across samples is built using the merged BAM file as input to IsoQuant. Because this step is computationally intensive, the merged BAM is split into 25 chromosome-level BAM files. IsoQuant is run on each chromosome, and the resulting extended GTFs are combined into a single extended GTF for downstream analysis.
+        A unified transcript model across samples is built using the merged BAM file as input to IsoQuant. Because this step is computationally intensive, the merged BAM is split into 25 chromosome-level BAM files. For chromosome 14, only reads within positions 1–104,474,600 are used due to extremely high read depth in the IGH region. This depth arises because the samples are lymphoblastoid cell lines (LCLs), derived from B cells that strongly express IGH genes. The current model construction algorithm cannot handle this region, but all reads on chromosome 14 are still included later during read assignment. IsoQuant is run on each chromosome, and the resulting extended GTFs are combined into a single extended GTF for downstream analysis.
     
     - Read assignment to transcripts
     
