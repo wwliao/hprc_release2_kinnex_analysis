@@ -6,33 +6,33 @@ The workflows cover the full pipeline from preprocessing raw reads to downstream
 
 ## Steps
 
-0. Gene Annotation Preparation
+### 0. Gene Annotation Preparation
 
     We use [GENCODE Release 48](https://www.gencodegenes.org/human/release_48.html) as the reference gene annotation. The [GTF file](https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_48/gencode.v48.primary_assembly.annotation.gtf.gz) provides comprehensive annotation on the primary assembly.
 
     To ensure consistency with the reference genome, scaffold names are converted from GenBank accession numbers to UCSC-style names using the [assembly report](https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/001/405/GCA_000001405.29_GRCh38.p14/GCA_000001405.29_GRCh38.p14_assembly_report.txt). For example, `KI270706.1` is renamed to `chr1_KI270706v1_random`.
 
-1. Preprocessing
+### 1. Preprocessing
 
     For each of the 206 HPRC R2 samples, PacBio Kinnex cDNA libraries were sequenced in two runs. Depending on the sequencing facility, the resulting FLNC BAM files were either provided separately (two per sample) or already concatenated into one (see the [index file](https://github.com/human-pangenomics/hprc_intermediate_assembly/blob/main/data_tables/sequencing_data/data_kinnex_pre_release.index.csv) for download links).
 
     For consistency, we concatenate the two runs into a single FLNC BAM per sample. After concatenation, we update the `SM` field in the `@RG` header line to match the sample ID (instead of default values like `BioSample_1`) and generate the corresponding PBI index.
 
-2. Read Alignment
+### 2. Read Alignment
 
     To align FLNC reads, each BAM file is converted to FASTQ format. We add the sample ID as a prefix to each read name to ensure uniqueness after pooling across samples. Each FASTQ file is then aligned to the reference genome using minimap2 with GENCODE v48 annotations in BED12 format.
 
     Finally, the 206 aligned BAM files are merged into a single BAM file for unified transcript model construction across samples.
 
-3. Transcript Discovery
+### 3. Transcript Discovery
 
-    - Transcript model construction
+    3.1 Transcript model construction
     
         A unified transcript model across samples is built using the merged BAM file as input to IsoQuant. Because this step is computationally intensive, the merged BAM is split into 25 chromosome-level BAM files. For chromosome 14, only reads within positions 1–104,474,600 are used due to extremely high read depth in the IGH region. This depth arises because the samples are lymphoblastoid cell lines (LCLs), derived from B cells that strongly express IGH genes. The current model construction algorithm cannot handle this region, but all reads on chromosome 14 are still included later during read assignment. IsoQuant is run on each chromosome, and the resulting extended GTFs are combined into a single extended GTF for downstream analysis.
     
-    - Read assignment to transcripts
+    3.2 Read assignment to transcripts
     
         The extended GTF is then used as the unified transcript model. Each per-sample BAM file is processed with IsoQuant to assign reads to known and novel transcripts for qunatification.
 
-4. Transcript Quantification
-5. QTL mapping
+### 4. Transcript Quantification
+### 5. QTL mapping
