@@ -34,5 +34,7 @@ A unified transcript model across samples is built using the merged BAM file as 
     
 The extended GTF is then used as the unified transcript model. Each per-sample BAM file is processed with IsoQuant to assign reads to known and novel transcripts for qunatification.
 
+#### 3.3 Transcript model quality control
+
 ### 4. Transcript Quantification
 ### 5. QTL mapping
