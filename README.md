@@ -26,11 +26,11 @@ Finally, the 206 aligned BAM files are merged into a single BAM file for unified
 
 ### 3. Transcript Discovery
 
-3.1 Transcript model construction
+#### 3.1 Transcript model construction
     
 A unified transcript model across samples is built using the merged BAM file as input to IsoQuant. Because this step is computationally intensive, the merged BAM is split into 25 chromosome-level BAM files. For chromosome 14, only reads within positions 1–104,474,600 are used due to extremely high read depth in the IGH region. This depth arises because the samples are lymphoblastoid cell lines (LCLs), derived from B cells that strongly express IGH genes. The current model construction algorithm cannot handle this region, but all reads on chromosome 14 are still included later during read assignment. IsoQuant is run on each chromosome, and the resulting extended GTFs are combined into a single extended GTF for downstream analysis.
     
-3.2 Read assignment to transcripts
+#### 3.2 Read assignment to transcripts
     
 The extended GTF is then used as the unified transcript model. Each per-sample BAM file is processed with IsoQuant to assign reads to known and novel transcripts for qunatification.
 
