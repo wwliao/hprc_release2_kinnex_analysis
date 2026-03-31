@@ -20,7 +20,7 @@ For consistency, we concatenate the two runs into a single FLNC BAM per sample. 
 
 ### 2. Read Alignment
 
-To align FLNC reads, each BAM file is converted to FASTQ format. We add the sample ID as a prefix to each read name to ensure uniqueness after pooling across samples. Each FASTQ file is then aligned to the reference genome using minimap2 with [GENCODE v48 annotations in BED12 format](https://s3-us-west-2.amazonaws.com/human-pangenomics/submissions/5B3D117A-8331-447B-BFDF-1FDB1127A89E--YALE_KINNEX_ANALYSIS_R2/gene_annotations/gencode.v48.primary.ucscstyle.bed.gz).
+To align FLNC reads, each BAM file is converted to FASTQ format. We add the sample ID as a prefix to each read name to ensure uniqueness after pooling across samples. Each FASTQ file is then aligned to the reference genome using minimap2 with [GENCODE v48 annotations in BED12 format](https://s3-us-west-2.amazonaws.com/human-pangenomics/submissions/5B3D117A-8331-447B-BFDF-1FDB1127A89E--YALE_KINNEX_ANALYSIS_R2/gene_annotations/gencode.v48.primary.ucscstyle.bed.gz). An index file, [flnc_alignments.index.csv](https://github.com/wwliao/hprc_release2_kinnex_analysis/blob/main/index_files/flnc_alignments.index.csv), provides download paths for the 206 aligned BAM files. 
 
 Finally, the 206 aligned BAM files are merged into a single BAM file for unified transcript model construction across samples.
 
