@@ -22,19 +22,23 @@ To standardize inputs across samples, we concatenate the two runs into a single 
 
 FLNC BAM files are converted to FASTQ format prior to alignment. To avoid read name collisions when aggregating data across samples, the sample ID is added as a prefix to each read name.
 
-Reads are aligned to the reference genome using minimap2 with GENCODE v48 gene annotations converted to BED12 format ([gencode.v48.primary.ucscstyle.bed.gz](https://s3-us-west-2.amazonaws.com/human-pangenomics/submissions/5B3D117A-8331-447B-BFDF-1FDB1127A89E--YALE_KINNEX_ANALYSIS_R2/gene_annotations/gencode.v48.primary.ucscstyle.bed.gz)). The resulting aligned BAM files for all samples are available via the index file [flnc_alignments.index.csv](https://github.com/wwliao/hprc_release2_kinnex_analysis/blob/main/index_files/flnc_alignments.index.csv), which provides the corresponding S3 download paths. Files can be downloaded using the [AWS CLI](https://aws.amazon.com/cli/): `aws s3 --no-sign-request cp <s3_path> .`.
+Reads are aligned to the reference genome using minimap2 with GENCODE v48 gene annotations converted to BED12 format ([gencode.v48.primary.ucscstyle.bed.gz](https://s3-us-west-2.amazonaws.com/human-pangenomics/submissions/5B3D117A-8331-447B-BFDF-1FDB1127A89E--YALE_KINNEX_ANALYSIS_R2/gene_annotations/gencode.v48.primary.ucscstyle.bed.gz)). The resulting aligned BAM files for all samples are available via the index file [flnc_alignments.index.csv](https://github.com/wwliao/hprc_release2_kinnex_analysis/blob/main/index_files/flnc_alignments.index.csv), which provides the corresponding S3 paths. Files can be downloaded using the [AWS CLI](https://aws.amazon.com/cli/): `aws s3 --no-sign-request cp <s3_path> .`.
 
-For unified transcript model construction, all per-sample BAM files are merged into a single BAM file to enable joint analysis across individuals.
+For unified transcript model construction, all per-sample BAM files are merged into a single BAM file to enable joint analysis across samples.
 
 ## 4. Transcript Discovery
 
 ### 4.1 Transcript model construction
     
-A unified transcript model across samples is built using the merged BAM file as input to IsoQuant. Because this step is computationally intensive, the merged BAM is split into 25 chromosome-level BAM files. For chromosome 14, only reads within positions 1–104,474,600 are used due to extremely high read depth in the IGH region. This depth arises because the samples are lymphoblastoid cell lines (LCLs), derived from B cells that strongly express IGH genes. The current model construction algorithm cannot handle this region, but all reads on chromosome 14 are still included later during read assignment. IsoQuant is run on each chromosome, and the resulting extended GTFs are combined into a single extended GTF for downstream analysis.
-    
+A unified transcript model is constructed across all samples using IsoQuant. To improve computational efficiency, the merged BAM is split into chromosome-level BAM files and processed independently.
+
+For chromosome 14, only reads within positions 1–104,474,600 are used during model construction due to extremely high read depth in the IGH region. This depth arises because the samples are lymphoblastoid cell lines (LCLs), derived from B cells with strong IGH expression. The current model construction algorithm cannot efficiently handle this region. Importantly, all reads from chromosome 14 are retained in downstream steps, including read assignment and quantification.
+
+IsoQuant is applied to each chromosome, and the resulting extended GTF files are concatenated into a single extended GTF.
+
 ### 4.2 Read assignment to transcripts
     
-The extended GTF is then used as the unified transcript model. Each per-sample BAM file is processed with IsoQuant to assign reads to known and novel transcripts for qunatification.
+The extended GTF serves as the unified transcript model. Each per-sample BAM file is processed with IsoQuant to assign reads to both known and novel transcripts, producing per-sample transcript-level assignments.
 
 ### 4.3 Transcript model quality control
 
