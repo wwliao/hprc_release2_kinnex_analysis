@@ -48,5 +48,7 @@ To improve robustness, multiple orthogonal sources of evidence are incorporated 
 
 Based on these metrics, low-confidence transcripts (e.g., those with insufficient support or likely artifacts) are filtered out. At the same time, transcripts with strong supporting evidence are retained through a rescue step, even if they do not fully match reference annotations. This procedure balances sensitivity and specificity, removing likely artifacts while preserving biologically meaningful novel transcripts.
 
+The unified transcript model after quality control is available for download as [HPRC_R2_FLNC.final_extended_annotation.gtf.gz](https://s3-us-west-2.amazonaws.com/human-pangenomics/submissions/5B3D117A-8331-447B-BFDF-1FDB1127A89E--YALE_KINNEX_ANALYSIS_R2/gene_annotations/HPRC_R2_FLNC.final_extended_annotation.gtf.gz).
+
 ## 5. Transcript Quantification
 ## 6. QTL mapping
