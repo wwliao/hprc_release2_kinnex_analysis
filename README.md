@@ -42,5 +42,11 @@ The extended GTF serves as the unified transcript model. Each per-sample BAM fil
 
 ### 4.3 Transcript model quality control
 
+To ensure the reliability of the unified transcript model, quality control is performed using SQANTI3. This step evaluates structural and annotation consistency of both known and novel transcripts, and provides classification and quality metrics based on splice junction support, transcript completeness, and agreement with reference annotation.
+
+To improve robustness, multiple orthogonal sources of evidence are incorporated during QC, including splice junction support from short-read data, CAGE peaks for transcription start sites, polyA signals and peaks for transcript termination, and evolutionary conservation scores. These features provide complementary validation of transcript structures beyond the input long-read data.
+
+Based on these metrics, low-confidence transcripts (e.g., those with insufficient support or likely artifacts) are filtered out. At the same time, transcripts with strong supporting evidence are retained through a rescue step, even if they do not fully match reference annotations. This procedure balances sensitivity and specificity, removing likely artifacts while preserving biologically meaningful novel transcripts.
+
 ## 5. Transcript Quantification
 ## 6. QTL mapping
