@@ -51,4 +51,9 @@ Based on these metrics, low-confidence transcripts (e.g., those with insufficien
 The unified transcript model after quality control is available for download as [HPRC_R2_FLNC.final_extended_annotation.gtf.gz](https://s3-us-west-2.amazonaws.com/human-pangenomics/submissions/5B3D117A-8331-447B-BFDF-1FDB1127A89E--YALE_KINNEX_ANALYSIS_R2/gene_annotations/HPRC_R2_FLNC.final_extended_annotation.gtf.gz).
 
 ## 5. Transcript Quantification
+
+### 5.1 Extract transcript sequences
+
+Transcript sequences are extracted from the quality-controlled unified transcript annotation, [HPRC_R2_FLNC.final_extended_annotation.gtf.gz](https://s3-us-west-2.amazonaws.com/human-pangenomics/submissions/5B3D117A-8331-447B-BFDF-1FDB1127A89E--YALE_KINNEX_ANALYSIS_R2/gene_annotations/HPRC_R2_FLNC.final_extended_annotation.gtf.gz), using gffread together with the reference genome sequence. This step generates the corresponding transcript FASTA file, [HPRC_R2_FLNC.final_extended_annotation.fa.gz](https://s3-us-west-2.amazonaws.com/human-pangenomics/submissions/5B3D117A-8331-447B-BFDF-1FDB1127A89E--YALE_KINNEX_ANALYSIS_R2/gene_annotations/HPRC_R2_FLNC.final_extended_annotation.fa.gz), which is used for downstream transcript-level quantification.
+
 ## 6. QTL mapping
