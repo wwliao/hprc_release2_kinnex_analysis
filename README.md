@@ -56,4 +56,8 @@ The unified transcript model after quality control is available for download as 
 
 Transcript sequences are extracted from the quality-controlled unified transcript annotation, [HPRC_R2_FLNC.final_extended_annotation.gtf.gz](https://s3-us-west-2.amazonaws.com/human-pangenomics/submissions/5B3D117A-8331-447B-BFDF-1FDB1127A89E--YALE_KINNEX_ANALYSIS_R2/gene_annotations/HPRC_R2_FLNC.final_extended_annotation.gtf.gz), using gffread together with the reference genome sequence. This step generates the corresponding transcript FASTA file, [HPRC_R2_FLNC.final_extended_annotation.fa.gz](https://s3-us-west-2.amazonaws.com/human-pangenomics/submissions/5B3D117A-8331-447B-BFDF-1FDB1127A89E--YALE_KINNEX_ANALYSIS_R2/gene_annotations/HPRC_R2_FLNC.final_extended_annotation.fa.gz), which is used for downstream transcript-level quantification.
 
+### 5.2 Read alignment to transcript sequences
+
+Preprocessed FLNC BAM files (see [Step 2: Preprocessing](#2-preprocessing)) are converted to FASTQ format. Reads are then aligned to the transcript sequences using minimap2 with `-ax map-hifi --eqx -N 100`, and the resulting alignments are stored in BAM format.
+
 ## 6. QTL mapping
