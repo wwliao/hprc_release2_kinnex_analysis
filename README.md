@@ -64,7 +64,7 @@ Preprocessed FLNC BAM files (see [Step 2: Preprocessing](#2-preprocessing)) are 
 
 Alignments of FLNC reads to transcript sequences are used as input for estimating transcript abundance using [oarfish](https://github.com/COMBINE-lab/oarfish) with `--min-aligned-fraction 0.8 --strand-filter fw --model-coverage`.
 
-Oarfish estimates transcript abundance using a probabilistic model that accounts for alignment quality, read placement along transcripts, and coverage patterns. Transcript abundances are inferred using an expectation–maximization EM algorithm. By modeling coverage consistency along transcripts, this approach improves the resolution of ambiguous read assignments.
+Oarfish estimates transcript abundance using a probabilistic model that accounts for alignment quality, read placement along transcripts, and coverage patterns. Transcript abundances are inferred using an expectation–maximization algorithm. By modeling coverage consistency along transcripts, this approach improves the resolution of ambiguous read assignments.
 
 The resulting values are floating-point rather than integers, as reads may be probabilistically assigned across multiple transcripts when they are compatible with more than one isoform. This reflects uncertainty in read assignment.
 
