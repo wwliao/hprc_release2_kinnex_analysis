@@ -1,10 +1,10 @@
 # Kinnex Data Analysis for the HPRC Release 2
 
-This repository provides Nextflow workflows for analyzing PacBio Kinnex long-read RNA sequencing data from 206 individuals in the Human Pangenome Reference Consortium Release 2 (HPRC R2). The workflows cover the full pipeline from raw read preprocessing to downstream QTL mapping, enabling reproducible analysis of transcript expression and regulatory variation.
+This repository provides Nextflow workflows for analyzing PacBio Kinnex long-read RNA sequencing data from 206 individuals in the Human Pangenome Reference Consortium Release 2 (HPRC R2). The workflows cover the full pipeline from raw read preprocessing to transcript quantification, enabling reproducible analysis of transcript expression and regulatory variation.
 
 ## Workflow Overview
 
-The analysis consists of gene annotation preparation, preprocessing of raw reads, read alignment, transcript discovery, transcript quantification, and QTL mapping.
+The analysis consists of gene annotation preparation, preprocessing of raw reads, read alignment, transcript discovery, and transcript quantification.
 
 ## 1. Gene Annotation Preparation
 
