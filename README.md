@@ -60,4 +60,12 @@ Transcript sequences are extracted from the quality-controlled unified transcrip
 
 Preprocessed FLNC BAM files (see [Step 2: Preprocessing](#2-preprocessing)) are converted to FASTQ format. Reads are then aligned to the transcript sequences using minimap2 with `-ax map-hifi --eqx -N 100`, and the resulting alignments are stored in BAM format.
 
+### 5.3 Transcript abundance estimation
+
+Alignments of FLNC reads to transcript sequences are used as input for estimating transcript abundance using [oarfish](https://github.com/COMBINE-lab/oarfish) with `--min-aligned-fraction 0.8 --strand-filter fw --model-coverage`.
+
+Oarfish estimates transcript abundance using a probabilistic model that accounts for alignment quality, read placement along transcripts, and coverage patterns. Transcript abundances are inferred using an expectation–maximization algorithm. The resulting values are floating-point rather than integers, as reads may be probabilistically assigned or fractionally distributed across multiple transcripts when they are compatible with more than one isoform. This approach reflects uncertainty in read assignment and incorporates additional evidence such as alignment scores and coverage consistency.
+
+These outputs are aggregated across samples to generate transcript-level and gene-level expression matrices using a custom R script for downstream analyses such as QTL mapping.
+
 ## 6. QTL mapping
