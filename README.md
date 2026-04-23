@@ -64,8 +64,17 @@ Preprocessed FLNC BAM files (see [Step 2: Preprocessing](#2-preprocessing)) are 
 
 Alignments of FLNC reads to transcript sequences are used as input for estimating transcript abundance using [oarfish](https://github.com/COMBINE-lab/oarfish) with `--min-aligned-fraction 0.8 --strand-filter fw --model-coverage`.
 
-Oarfish estimates transcript abundance using a probabilistic model that accounts for alignment quality, read placement along transcripts, and coverage patterns. Transcript abundances are inferred using an expectation–maximization algorithm. The resulting values are floating-point rather than integers, as reads may be probabilistically assigned or fractionally distributed across multiple transcripts when they are compatible with more than one isoform. This approach reflects uncertainty in read assignment and incorporates additional evidence such as alignment scores and coverage consistency.
+Oarfish estimates transcript abundance using a probabilistic model that accounts for alignment quality, read placement along transcripts, and coverage patterns. Transcript abundances are inferred using an expectation–maximization EM algorithm. By modeling coverage consistency along transcripts, this approach improves the resolution of ambiguous read assignments.
+
+The resulting values are floating-point rather than integers, as reads may be probabilistically assigned across multiple transcripts when they are compatible with more than one isoform. This reflects uncertainty in read assignment.
 
 These outputs are aggregated across samples to generate transcript-level and gene-level expression matrices using a custom R script for downstream analyses such as QTL mapping.
 
-## 6. QTL mapping
+The resulting expression matrices are available for download:
+
+- Transcript-level (floating-point): [HPRC_R2_FLNC.transcript_level_counts.float.tsv.gz](https://s3-us-west-2.amazonaws.com/human-pangenomics/submissions/5B3D117A-8331-447B-BFDF-1FDB1127A89E--YALE_KINNEX_ANALYSIS_R2/estimated_counts/HPRC_R2_FLNC.transcript_level_counts.float.tsv.gz)
+- Transcript-level (integer, rounded): [HPRC_R2_FLNC.transcript_level_counts.tsv.gz](https://s3-us-west-2.amazonaws.com/human-pangenomics/submissions/5B3D117A-8331-447B-BFDF-1FDB1127A89E--YALE_KINNEX_ANALYSIS_R2/estimated_counts/HPRC_R2_FLNC.transcript_level_counts.tsv.gz)
+- Gene-level (floating-point): [HPRC_R2_FLNC.gene_level_counts.float.tsv.gz](https://s3-us-west-2.amazonaws.com/human-pangenomics/submissions/5B3D117A-8331-447B-BFDF-1FDB1127A89E--YALE_KINNEX_ANALYSIS_R2/estimated_counts/HPRC_R2_FLNC.gene_level_counts.float.tsv.gz)
+- Gene-level (integer, rounded): [HPRC_R2_FLNC.gene_level_counts.tsv.gz](https://s3-us-west-2.amazonaws.com/human-pangenomics/submissions/5B3D117A-8331-447B-BFDF-1FDB1127A89E--YALE_KINNEX_ANALYSIS_R2/estimated_counts/HPRC_R2_FLNC.gene_level_counts.tsv.gz)
+
+The floating-point values are the original outputs from oarfish. Integer versions are generated for compatibility with downstream tools that require integer counts.
